@@ -1,3 +1,4 @@
+import {run} from 'uebersicht';
 import styles from "./styles.jsx";
 
 const containerStyle = {
@@ -7,7 +8,7 @@ const containerStyle = {
 };
 
 const desktopStyle = {
-  width: "3ch",
+  width: "4ch",
 };
 
 const renderSpace = (index, focused, visible, windows) => {
@@ -19,10 +20,12 @@ const renderSpace = (index, focused, visible, windows) => {
   } else if (visible == 1) {
     contentStyle.color = styles.colors.fg;
   }
+  const onClick = () => run(`/usr/local/bin/yabai -m space --focus ${index}`)
+
   return (
-    <div style={contentStyle}>
-      &nbsp;{index}
-      {hasWindows ? "°" : " "}
+    <div style={contentStyle} onClick={onClick}>
+      &nbsp;
+      {hasWindows ? `[${index}]` : `-${index}-`}
     </div>
   );
 };
